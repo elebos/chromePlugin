@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>生成金价图标</title>
+<style>
+body { 
+  font-family: sans-serif; 
+  padding: 40px; 
+  text-align: center;
+  background: #f5f5f5;
+}
+canvas { 
+  border: 2px solid #ddd; 
+  background: white;
+  margin: 20px;
+}
+button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px;
+}
+button:hover {
+  background: #45a049;
+}
+.info {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 20px auto;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+</style>
+</head>
+<body>
+<h1>🪙 金价插件图标生成器</h1>
+
+<div class="info">
+  <h3>步骤：</h3>
+  <ol style="text-align: left;">
+    <li>点击下方"生成图标"按钮</li>
+    <li>会自动下载 icon.png 文件</li>
+    <li>将下载的文件放到插件目录，替换原有的 icon.png</li>
+    <li>重新加载扩展</li>
+  </ol>
+</div>
+
+<canvas id="canvas" width="128" height="128"></canvas>
+<br>
+<button onclick="generateAndDownload()">🎨 生成并下载图标</button>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+function drawIcon() {
+  // 清空画布
+  ctx.clearRect(0, 0, 128, 128);
+  
+  // 金色渐变背景
+  const gradient = ctx.createRadialGradient(64, 64, 20, 64, 64, 56);
+  gradient.addColorStop(0, '#FFF9C4');
+  gradient.addColorStop(0.5, '#FFD54F');
+  gradient.addColorStop(1, '#FFA000');
+  
+  // 主圆形
+  ctx.fillStyle = gradient;
+  ctx.beginPath();
+  ctx.arc(64, 64, 56, 0, Math.PI * 2);
+  ctx.fill();
+  
+  // 外圈边框
+  ctx.strokeStyle = '#F57C00';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  
+  // 内圈装饰
+  ctx.strokeStyle = '#FFE082';
+  ctx.lineWidth = 1.5;
+  ctx.globalAlpha = 0.6;
+  ctx.beginPath();
+  ctx.arc(64, 64, 50, 0, Math.PI * 2);
+  ctx.stroke();
+  
+  // 金字
+  ctx.globalAlpha = 0.9;
+  ctx.fillStyle = '#E65100';
+  ctx.font = 'bold 52px Arial, "Hiragino Sans GB", "Microsoft YaHei"';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('金', 64, 68);
+  
+  // 高光
+  ctx.globalAlpha = 0.4;
+  ctx.fillStyle = 'white';
+  ctx.beginPath();
+  ctx.arc(50, 50, 8, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function generateAndDownload() {
+  drawIcon();
+  
+  // 转换为 blob 并下载
+  canvas.toBlob(blob => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'icon.png';
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    alert('✅ 图标已下载！\n\n请将下载的 icon.png 文件:\n1. 复制到插件文件夹\n2. 替换原有的 icon.png\n3. 重新加载扩展');
+  }, 'image/png');
+}
+
+// 页面加载时绘制预览
+drawIcon();
+</script>
+</body>
+</html>

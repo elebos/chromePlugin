@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "实时金价",
+  "version": "1.0.1",
+  "description": "实时显示黄金价格，数据来源：上海黄金交易所官方API，每秒自动更新，显示全天走势图",
+  "permissions": [
+    "storage",
+    "scripting",
+    "tabs",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://www.sge.com.cn/*",
+    "https://m.icbc.com.cn/*",
+    "https://*.icbc.com.cn/*",
+    "https://papi.icbc.com.cn/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "实时金价",
+    "default_icon": {
+      "16": "icon.png",
+      "32": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.sge.com.cn/*",
+        "https://m.icbc.com.cn/*",
+        "https://*.icbc.com.cn/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
+

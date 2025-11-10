@@ -1,0 +1,31 @@
+<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="goldGradient">
+      <stop offset="0%" style="stop-color:#FFF9C4"/>
+      <stop offset="50%" style="stop-color:#FFD54F"/>
+      <stop offset="100%" style="stop-color:#FFA000"/>
+    </radialGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- 主圆形（金币） -->
+  <circle cx="64" cy="64" r="56" fill="url(#goldGradient)" filter="url(#shadow)"/>
+  
+  <!-- 外圈装饰 -->
+  <circle cx="64" cy="64" r="56" fill="none" stroke="#F57C00" stroke-width="3"/>
+  <circle cx="64" cy="64" r="50" fill="none" stroke="#FFE082" stroke-width="1.5" opacity="0.6"/>
+  
+  <!-- 内圈 -->
+  <circle cx="64" cy="64" r="45" fill="#FFF59D" opacity="0.3"/>
+  
+  <!-- 金字 -->
+  <text x="64" y="82" font-family="Arial, sans-serif" font-size="52" font-weight="bold" 
+        text-anchor="middle" fill="#E65100" opacity="0.9">金</text>
+  
+  <!-- 高光效果 -->
+  <circle cx="50" cy="50" r="8" fill="white" opacity="0.4"/>
+  <circle cx="48" cy="48" r="4" fill="white" opacity="0.6"/>
+</svg>
+
