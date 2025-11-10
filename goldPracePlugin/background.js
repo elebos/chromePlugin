@@ -603,6 +603,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       
       if (manager.priceHistory.length > 100) {
         manager.priceHistory.shift();
+
       }
       
       manager.updateBadge();
